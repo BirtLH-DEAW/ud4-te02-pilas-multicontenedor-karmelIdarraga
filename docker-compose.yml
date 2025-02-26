@@ -48,12 +48,5 @@ services:
     volumes:
       - proyecto:/usr/local/apache2/htdocs/
 
-  # apache2:
-  #   build: apache2/
-  #   ports:
-  #     - 82:80
-  #   volumes:
-  #     - proyecto:/var/www/html
-
 volumes: 
   proyecto:
