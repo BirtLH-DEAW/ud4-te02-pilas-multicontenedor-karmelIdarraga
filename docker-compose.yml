@@ -7,21 +7,32 @@ services:
   # mysql es el nombre que vamos a dar a este primer servicio
   # Será el nombre que tendremos que usar cuando nos refiramos a él
   mysql:
-    image: mysql:5.7
+    build: mysql/
     ports:
       - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_USER: froga
-      MYSQL_PASSWORD: froga
-      MYSQL_DATABASE: froga
+      MYSQL_USER: wp_karmel
+      MYSQL_PASSWORD: wp_karmel
+      MYSQL_DATABASE: wp_karmel
 
-  apache:
-    build: apache/
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    depends_on:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: root
     ports:
-      - 80:80
-    volumes:
-      - proyecto:/var/www/html/
+      - "8080:80"
+
+  # apache:
+  #   build: apache/
+  #   ports:
+  #     - 81:80
+  #   volumes:
+  #     - proyecto:/var/www/html/
 
   php:
     build: php/
@@ -29,6 +40,20 @@ services:
       - 9000:9000
     volumes:
       - proyecto:/var/www/html/
+
+  httpd:
+    build: httpd/
+    ports: 
+      - 85:80
+    volumes:
+      - proyecto:/usr/local/apache2/htdocs/
+
+  # apache2:
+  #   build: apache2/
+  #   ports:
+  #     - 82:80
+  #   volumes:
+  #     - proyecto:/var/www/html
 
 volumes: 
   proyecto:

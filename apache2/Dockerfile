@@ -1,4 +1,12 @@
-FROM ubuntu:18.04
+FROM ubuntu/apache2:2.4-22.04_beta
+
+# Da información sobre la imagen que estamos creando
+# Podemos usar la \ para encadenar todos los valores
+LABEL \
+	authors="kidarraga" \
+	version="1.0" \
+	description="Ubuntu + Apache2" \
+	creationDate="20-02-2025"
 
 RUN apt-get update && apt-get install -y apache2 git wget \
     && apt-get -y install libapache2-mod-fcgid \
@@ -24,4 +32,3 @@ RUN mkdir /var/www/html/wordpress \
 COPY wp-config.php /var/www/html/wordpress
 
 EXPOSE 80
-CMD ["apachectl", "-D", "FOREGROUND"]
