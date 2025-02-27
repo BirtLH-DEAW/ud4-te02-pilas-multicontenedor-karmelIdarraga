@@ -19,16 +19,14 @@ LABEL \
 	description="Apache2" \
 	creationDate="20-02-2025"
 
-# RUN apt-get update && apt-get install -y libapache2-mod-fcgid \
-#     && a2enmod proxy_fcgi
-
 COPY httpd.conf /usr/local/apache2/conf/httpd.conf
 COPY index.php /usr/local/apache2/htdocs/index.php
 RUN mkdir /usr/local/apache2/htdocs/php \
-    && mkdir /usr/local/apache2/htdocs/wordpress
+    && mkdir /usr/local/apache2/htdocs/wordpress\
+    && chmod 777 -R /usr/local/apache2/htdocs
 
 COPY --from=intermedia /tmp/repo/php/* /usr/local/apache2/htdocs/php
 COPY --from=intermedia /tmp/wordpress/* /usr/local/apache2/htdocs/wordpress
-COPY wp-config.php /usr/local/apache2/htdocs/wordpress
+# COPY wp-config.php /usr/local/apache2/htdocs/wordpress
 
 EXPOSE 80

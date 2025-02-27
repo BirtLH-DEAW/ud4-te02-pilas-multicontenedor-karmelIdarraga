@@ -9,8 +9,8 @@ COPY index.php /var/www/html
 
 
 RUN git clone https://github.com/deaw-birt/UD4-despliegue-PHP.git /tmp/repo \
-    && mkdir /var/www/html/php-karmel \
-    && mv /tmp/repo/php/* /var/www/html/php-karmel
+    && mkdir /var/www/html/php \
+    && mv /tmp/repo/php/* /var/www/html/php
 
 RUN mkdir /var/www/html/wordpress \
     && cd /tmp \

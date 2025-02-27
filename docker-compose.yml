@@ -27,12 +27,12 @@ services:
     ports:
       - "8080:80"
 
-  # apache:
-  #   build: apache/
-  #   ports:
-  #     - 81:80
-  #   volumes:
-  #     - proyecto:/var/www/html/
+  apache:
+    build: apache/
+    ports:
+      - 85:80
+    volumes:
+      - proyecto:/var/www/html/
 
   php:
     build: php/
@@ -41,12 +41,12 @@ services:
     volumes:
       - proyecto:/var/www/html/
 
-  httpd:
-    build: httpd/
-    ports: 
-      - 85:80
-    volumes:
-      - proyecto:/usr/local/apache2/htdocs/
+  # httpd:
+  #   build: httpd/
+  #   ports: 
+  #     - 85:80
+  #   volumes:
+  #     - proyecto:/usr/local/apache2/htdocs/
 
 volumes: 
   proyecto:
